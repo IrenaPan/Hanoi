@@ -1,6 +1,8 @@
 "use strict";
 var isStart = false;
+//diskStack is used to record which disks are now on which stick.
 var diskStack = [['#disk5', '#disk4', '#disk3', '#disk2', '#disk1'], [], []];
+//moves is used to record all movements, then it will be animated.
 var moves = [];
 var moveParam = undefined;
 var widthInterval = 260;
@@ -10,7 +12,7 @@ var moveStarted = false;
 var numOfDisks = 5;
 var timer = null;
 
-
+//start funcion
 function start(){
 	bottomTop = $("#bottom").position().top;
 	diskHeight = $(".disk").height();
@@ -47,6 +49,7 @@ function hanoi(n, from, temp, to) {
 	hanoi(n-1, temp, from, to);
 }
 
+//move one disk from stick f to stcik t
 function moveOne(f, t) {
 	var diskToMove = diskStack[f].pop();
 
@@ -64,6 +67,7 @@ function moveOne(f, t) {
 	diskStack[t].push(diskToMove);
 }
 
+//animation of all moves
 function play() {
 	if (moves.length > 0) {
 		var oneMove = moves.shift();
